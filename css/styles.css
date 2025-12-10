@@ -102,7 +102,7 @@ h1 {
 	width: 100%;
 }
 
-.saludo {
+.mensaje {
 	font-size: 28px;
 	font-weight: bold;
 	color: #fff;
@@ -121,4 +121,46 @@ h1 {
 	color: #bbb;
 	margin-top: 10px;
 	text-align: center;
+}
+
+/* Estilos widget del tiempo */
+.widget-tiempo {
+	display: flex;
+ 	align-items: center;
+ 	gap: 16px;
+}
+.wt-left {
+ 	flex: 0 0 80px;
+}
+.wt-icon {
+ 	width: 64px;
+ 	height: 64px;
+ 	image-rendering: -webkit-optimize-contrast;
+}
+.wt-right {
+ 	flex: 1 1 auto;
+ 	color: #fff;
+}
+.wt-location {
+ 	font-size: 18px;
+ 	font-weight: 700;
+}
+.wt-localtime {
+ 	font-size: 14px;
+ 	color: #ddd;
+}
+.wt-temp {
+ 	font-size: 28px;
+ 	font-weight: 700;
+ 	margin-top: 6px;
+}
+.wt-cond, .wt-details {
+ 	font-size: 14px;
+ 	color: #ccc;
+ 	margin-top: 4px;
+}
+
+.contraseñas {
+	display: flex;
+	flex-direction: column;
 }

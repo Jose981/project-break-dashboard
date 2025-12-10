@@ -54,56 +54,53 @@ setInterval(actualizarReloj, 1000);
 window.addEventListener("load", () => {
   actualizarReloj();
   actualizarFecha();
-  obtenerLocalizacion();
 });
 
-// API del tiempo (la variable `ciudad` ahora puede venir de `getCity()`)
-const apiKey = "4a1cbd6a7a1d4d28ac7200810250512";
+// Funcion para obtener la ciudad en la que estoy
 
-// Función que obtiene la ciudad según la IP del usuario usando ipapi.co
-async function getCityFromIP() {
+let ciudad;
+let tiempo;
+async function obtenerCiudad() {
   try {
-    const res = await fetch("https://ipapi.co/json/");
-    if (!res.ok) throw new Error(`ipapi error ${res.status}`);
-    const json = await res.json();
-    // Devolver la ciudad si existe, si no devolver region o país como fallback
-    return json.city || json.region || json.country_name || "Desconocida";
-  } catch (err) {
-    console.error("Error obteniendo ciudad por IP:", err);
-    return "Desconocida";
+    const response = await fetch("http://ip-api.com/json/");
+    if (!response.ok) {
+      return new Error("Error al conectarte");
+    }
+
+    const data = await response.json();
+    return data.city;
+  } catch (error) {
+    return new Error("Error al conectarte a la API");
   }
 }
 
-// Guardamos la promesa en una const `ciudad` (resuelve a la ciudad como string)
-const ciudad = getCityFromIP();
+//Api para sacar el tiempo de la ciudad
+async function obtenerTiempo() {
+  let apiKey = "4a1cbd6a7a1d4d28ac7200810250512";
+  ciudad = await obtenerCiudad();
 
-// Ejemplo: usar la ciudad para hacer la petición del tiempo cuando esté disponible
-ciudad
-  .then((c) => {
-    const weatherUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(
-      c
-    )}&aqi=no`;
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${ciudad}&aqi=no`
+    );
+    if (!response.ok) {
+      return new Error("Error al obtener el tiempo");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return new Error("Error al obtener el tiempo de la ciudad");
+  }
+}
 
-    return fetch(weatherUrl);
-  })
-  .then((response) => {
-    if (!response || !response.ok) {
-      throw new Error(
-        `Error al acceder a la API del tiempo (status ${
-          response && response.status
-        })`
-      );
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log("Tiempo (por IP):", data);
-    // renderiza datos en DOM si quieres
-  })
-  .catch((err) => {
-    console.error("Fetch weather error:", err);
-    const tiempoEl = document.querySelector(".tiempo");
-    if (tiempoEl) {
-      tiempoEl.textContent = "No se pudo obtener el tiempo";
-    }
-  });
+// Ejecutar la obtención del tiempo en una función async (evita top-level await)
+async function obtenerTiempoCiudad() {
+  try {
+    tiempo = await obtenerTiempo();
+    console.log(tiempo);
+  } catch (err) {
+    console.error("Error inicializando tiempo:", err);
+  }
+}
+
+obtenerTiempoCiudad();
