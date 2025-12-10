@@ -15,21 +15,38 @@
           <div id="reloj" class="reloj">00:00:00</div>
         </div>
       </div>
-      <div class="tiempo">
+      <div class="tiempo" id="tiempo">
         <h1>Hueco para el tiempo</h1>
+        <div id="weather-widget">
+          <h3 id="weather-city"></h3>
+          <div class="weather-info">
+            <img id="weather-icon" alt="Icono del tiempo" />
+            <div>
+              <p id="weather-temp"></p>
+              <p id="weather-condition"></p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="contraseñas">
         <h1>Generador de contraseñas seguras</h1>
         <div class="seleccion">
-        <input type="number" id="eleccion" min="12" max="54" placeholder="12..54">
-        <button class="generador">Generar</button>
+          <input id="eleccion" type="number" />
+          <button id="generador">Generar contraseña</button>
+          <p id="clave-generada"></p>
         </div>
-        <input type="text" placeholder="Contraseña Segura"></input>
       </div>
       <div class="links">
         <h1>Hueco para enlaces de interés</h1>
+        <input id="texto-enlace" type="text" placeholder="Escribe un enlace" />
+        <button id="guardar-enlace">Guardar</button>
+        <div id="lista-enlaces"></div>
+        <button id="borrarTodos">Borrar todos</button>
       </div>
     </div>
-    <script src="./js/script.js"></script>
+    <script src="./js/scriptEnlaces.js"></script>
+    <script src="./js/scriptGenerarClave.js"></script>
+    <script src="./js/scriptHora.js"></script>
+    <script src="./js/scriptTiempo.js"></script>
   </body>
 </html>
