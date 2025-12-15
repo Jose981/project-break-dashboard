@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="./css/styles.css" />
+<body id="fondo">
+  <div class="div-completo">
+    <div class="links" style="padding: 60px">
+      <h1>Enlaces de interés</h1>
+      <input
+        id="nombre-enlace"
+        type="text"
+        placeholder="Nombre del enlace (ej. Blog, Docs)"
+      />
+      <input
+        id="texto-enlace"
+        type="text"
+        placeholder="Escribe la URL (https://...)"
+      />
+      <button id="guardar-enlace">Guardar</button>
+      <div id="lista-enlaces"></div>
+      <button id="borrarTodos">Borrar todos</button>
+    </div>
+  </div>
+  <button
+    id="btn-volver"
+    class="boton-volver"
+    onclick="location.href='index.html'"
+  >
+    Volver
+  </button>
+</body>
+<script src="./js/scriptEnlaces.js"></script>
+<script src="./js/fondo.js"></script>

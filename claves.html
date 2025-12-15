@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="./css/styles.css" />
+<body id="fondo">
+  <div class="div-completo">
+    <div class="contraseñas" style="padding: 60px">
+      <h1>Generador de contraseñas seguras</h1>
+      <div class="seleccion">
+        <input id="eleccion" min="12" max="50" type="number" />
+        <button id="generador">Generar contraseña</button>
+        <h2>Clave generada:</h2>
+        <p id="clave-generada"></p>
+      </div>
+    </div>
+  </div>
+  <button
+    id="btn-volver"
+    class="boton-volver"
+    onclick="location.href='index.html'"
+  >
+    Volver
+  </button>
+</body>
+<script src="./js/scriptGenerarClave.js"></script>
+<script src="./js/fondo.js"></script>

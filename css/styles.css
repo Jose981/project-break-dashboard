@@ -148,6 +148,17 @@ h2 {
 	flex-direction: column; 
 }
 
+.div-completo{
+	position: fixed;
+	display:flex;
+	inset: 0; 
+	align-items: center;
+	justify-content: center;
+	background: rgba(0,0,0,0.75);
+	z-index: 9999;
+	padding: 24px;
+}
+
 /* Estilos específicos para el generador de contraseñas */
 .contraseñas{
 	gap:12px;
@@ -379,7 +390,7 @@ h2 {
 }
 
 
-.links button#guardar-enlace{
+.boton, #guardar-enlace {
 	padding:10px 14px;
 	border-radius:8px;
 	border:none;
@@ -442,4 +453,20 @@ h2 {
 	.links #lista-enlaces{
 		max-width:100%
 	}
+}
+
+/* Botón volver en tiempo completo: abajo a la izquierda */
+.boton-volver{
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+	z-index: 10001;
+	padding: 10px 14px;
+	border-radius: 8px;
+	border: none;
+	background: linear-gradient(90deg,#93C5FD,#60A5FA);
+	color: #012;
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }

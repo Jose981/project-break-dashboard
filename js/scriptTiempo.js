@@ -3,13 +3,16 @@ let ciudad;
 let tiempo;
 async function obtenerCiudad() {
   try {
-    // Usar servicio HTTPS para evitar problemas de mixed content
-    const response = await fetch("https://ipapi.co/json/");
+    const response = await fetch("https://ipwho.is/");
     if (!response.ok) {
-      throw new Error(`ipapi status ${response.status}`);
+      throw new Error(`ipwho status ${response.status}`);
     }
 
     const data = await response.json();
+    if (!data.success) {
+      throw new Error("ipwho no success");
+    }
+
     return data.city || null;
   } catch (error) {
     console.error("obtenerCiudad error:", error);
@@ -27,7 +30,6 @@ async function obtenerTiempo() {
   }
 
   try {
-    // Pedimos varios días de pronóstico (5 días) y solicitamos textos en español
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(
       ciudad
     )}&days=5&aqi=no&alerts=no&lang=es`;
@@ -77,13 +79,12 @@ async function obtenerTiempoCiudad() {
     const elTemp = document.getElementById("weather-temp");
     const elCond = document.getElementById("weather-condition");
     const elIcon = document.getElementById("weather-icon");
-    const elForecast = document.getElementById("weather-forecast");
     if (elCity) elCity.innerText = ciudadNombre;
     if (elTemp) elTemp.innerText = temp;
     if (elCond) elCond.innerText = condicion;
     if (elIcon && icono) elIcon.src = icono;
-
-    // Renderizar pronóstico de varios días si está disponible
+    // Renderizar pronóstico multi-día si existe
+    const elForecast = document.getElementById("weather-forecast");
     if (
       elForecast &&
       tiempo &&
@@ -101,13 +102,7 @@ async function obtenerTiempoCiudad() {
           const max = Math.round(d.day.maxtemp_c);
           const min = Math.round(d.day.mintemp_c);
           const cond = d.day.condition.text || "";
-          return `
-            <article class="forecast-day" role="group" aria-label="Pronóstico ${label}">
-              <div class="fd-date">${label}</div>
-              <img class="fd-icon" src="${icon}" alt="${cond}"/>
-              <div class="fd-temps"><span class="fd-max">${max}°</span><span class="fd-min">${min}°</span></div>
-              <div class="fd-cond">${cond}</div>
-            </article>`;
+          return `\n            <article class="forecast-day" role="group" aria-label="Pronóstico ${label}">\n              <div class="fd-date">${label}</div>\n              <img class="fd-icon" src="${icon}" alt="${cond}"/>\n              <div class="fd-temps"><span class="fd-max">${max}°</span><span class="fd-min">${min}°</span></div>\n              <div class="fd-cond">${cond}</div>\n            </article>`;
         })
         .join("");
     }

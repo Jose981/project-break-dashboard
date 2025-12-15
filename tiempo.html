@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="./css/styles.css" />
+<body id="fondo">
+  <div class="div-completo" id="tiempo">
+    <div id="weather-widget">
+      <h3 id="weather-city"></h3>
+      <div class="weather-info">
+        <img id="weather-icon" alt="Icono del tiempo" />
+        <div>
+          <p id="weather-temp"></p>
+          <p id="weather-condition"></p>
+        </div>
+      </div>
+      <!-- Pronóstico multi-día -->
+      <div
+        id="weather-forecast"
+        class="forecast"
+        aria-label="Pronóstico de varios días"
+      ></div>
+    </div>
+  </div>
+  <button
+    id="btn-volver"
+    class="boton-volver"
+    onclick="location.href='index.html'"
+  >
+    Volver
+  </button>
+</body>
+<script src="./js/scriptTiempo.js"></script>
+<script src="./js/fondo.js"></script>
