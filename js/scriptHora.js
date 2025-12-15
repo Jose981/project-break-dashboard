@@ -32,14 +32,22 @@ function actualizarSaludo(hora) {
   const saludoElement = document.getElementById("mensaje");
   let saludo = "";
 
-  if (hora >= 5 && hora < 12) {
-    saludo = "¡Buenos días!";
-  } else if (hora >= 12 && hora < 18) {
-    saludo = "¡Buenas tardes!";
+  if (hora >= 24 && hora < 7) {
+    saludo = "Es hora de descansar. Apaga y sigue mañana";
+  } else if (hora >= 7 && hora < 12) {
+    saludo = "Buenos días, desayuna fuerte y a darle al código";
+  } else if (hora >= 12 && hora < 14) {
+    saludo = "Echa un rato más pero no olvides comer";
+  } else if (hora >= 12 && hora < 14) {
+    saludo = "Echa un rato más pero no olvides comer";
+  } else if (hora >= 14 && hora < 16) {
+    saludo = "Espero que hayas comido";
+  } else if (hora >= 16 && hora < 18) {
+    saludo = "Buenas tardes, el último empujón";
   } else if (hora >= 18 && hora < 22) {
-    saludo = "¡Buenas noches!";
+    saludo = "Esto ya son horas extras, ... piensa en parar pronto";
   } else {
-    saludo = "¡Buenas madrugadas!";
+    saludo = "Buenas noches, es hora de pensar en parar y descansar";
   }
 
   if (saludoElement) {

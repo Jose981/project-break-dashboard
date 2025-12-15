@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/styles.css" />
-    <title>Dashboard</title>
+    <title>Panel de control</title>
   </head>
   <body id="fondo">
+    <div class="header">
+      <div class="botones">
+        <button>Reloj</button>
+        <button>Tiempo</button>
+        <button>Contraseñas</button>
+        <button>Enlaces</button>
+      </div>
+    </div>
     <div class="contenedor-principal">
       <div class="hora">
         <div class="contenedor-hora">
@@ -16,7 +24,6 @@
         </div>
       </div>
       <div class="tiempo" id="tiempo">
-        <h1>Hueco para el tiempo</h1>
         <div id="weather-widget">
           <h3 id="weather-city"></h3>
           <div class="weather-info">
@@ -26,19 +33,35 @@
               <p id="weather-condition"></p>
             </div>
           </div>
+          <!-- Pronóstico multi-día -->
+          <div
+            id="weather-forecast"
+            class="forecast"
+            aria-label="Pronóstico de varios días"
+          ></div>
         </div>
       </div>
       <div class="contraseñas">
         <h1>Generador de contraseñas seguras</h1>
         <div class="seleccion">
-          <input id="eleccion" type="number" />
+          <input id="eleccion" min="12" max="50" type="number" />
           <button id="generador">Generar contraseña</button>
+          <h2>Clave generada:</h2>
           <p id="clave-generada"></p>
         </div>
       </div>
       <div class="links">
-        <h1>Hueco para enlaces de interés</h1>
-        <input id="texto-enlace" type="text" placeholder="Escribe un enlace" />
+        <h1>Enlaces de interés</h1>
+        <input
+          id="nombre-enlace"
+          type="text"
+          placeholder="Nombre del enlace (ej. Blog, Docs)"
+        />
+        <input
+          id="texto-enlace"
+          type="text"
+          placeholder="Escribe la URL (https://...)"
+        />
         <button id="guardar-enlace">Guardar</button>
         <div id="lista-enlaces"></div>
         <button id="borrarTodos">Borrar todos</button>

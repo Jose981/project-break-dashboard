@@ -7,7 +7,7 @@ botonGenerar.addEventListener("click", () => {
   const longitud = parseInt(numeroCaracteres.value);
 
   if (isNaN(longitud) || longitud <= 0) {
-    claveGenerada.textContent = "Introduce un número válido";
+    claveGenerada.textContent = "Introduce un número entre el 12 y el 50";
     return;
   }
 

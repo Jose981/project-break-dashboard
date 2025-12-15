@@ -26,7 +26,7 @@ function cambiarFondo() {
 // Esperar a que el DOM esté listo antes de cambiar el fondo
 window.addEventListener("DOMContentLoaded", () => {
   cambiarFondo(); // Primera imagen al cargar
-  setInterval(cambiarFondo, 10000); // Cambia cada 20 segundos
+  setInterval(cambiarFondo, 20000); // Cambia cada 20 segundos
 });
 
 // Fallback si DOMContentLoaded ya pasó

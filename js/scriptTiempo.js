@@ -27,9 +27,10 @@ async function obtenerTiempo() {
   }
 
   try {
+    // Pedimos varios días de pronóstico (5 días) y solicitamos textos en español
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(
       ciudad
-    )}&aqi=no`;
+    )}&days=5&aqi=no&alerts=no&lang=es`;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`weatherapi status ${response.status}`);
@@ -76,10 +77,40 @@ async function obtenerTiempoCiudad() {
     const elTemp = document.getElementById("weather-temp");
     const elCond = document.getElementById("weather-condition");
     const elIcon = document.getElementById("weather-icon");
+    const elForecast = document.getElementById("weather-forecast");
     if (elCity) elCity.innerText = ciudadNombre;
     if (elTemp) elTemp.innerText = temp;
     if (elCond) elCond.innerText = condicion;
     if (elIcon && icono) elIcon.src = icono;
+
+    // Renderizar pronóstico de varios días si está disponible
+    if (
+      elForecast &&
+      tiempo &&
+      tiempo.forecast &&
+      tiempo.forecast.forecastday
+    ) {
+      const days = tiempo.forecast.forecastday;
+      elForecast.innerHTML = days
+        .map((d) => {
+          const date = new Date(d.date);
+          const opciones = { weekday: "short", month: "short", day: "numeric" };
+          const label = date.toLocaleDateString("es-ES", opciones);
+          let icon = d.day.condition.icon || "";
+          if (icon && icon.startsWith("//")) icon = "https:" + icon;
+          const max = Math.round(d.day.maxtemp_c);
+          const min = Math.round(d.day.mintemp_c);
+          const cond = d.day.condition.text || "";
+          return `
+            <article class="forecast-day" role="group" aria-label="Pronóstico ${label}">
+              <div class="fd-date">${label}</div>
+              <img class="fd-icon" src="${icon}" alt="${cond}"/>
+              <div class="fd-temps"><span class="fd-max">${max}°</span><span class="fd-min">${min}°</span></div>
+              <div class="fd-cond">${cond}</div>
+            </article>`;
+        })
+        .join("");
+    }
   } catch (err) {
     console.error("Error inicializando tiempo:", err);
   }
